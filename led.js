@@ -8,7 +8,7 @@ function updateThingSpeak(value) {
   }
 
   canClick = false; // Blokuj kolejne kliknięcia
-  countdown(6); // Rozpocznij odliczanie
+  countdown(15); // Rozpocznij odliczanie
 
   const writeApiKey = 'PD2PF82ZK1ZKM5G9';
   const url = `https://api.thingspeak.com/update?api_key=${writeApiKey}&field1=${value}`;
