@@ -3,7 +3,7 @@ let canClick = true; // Zmienna kontrolująca, czy można wysłać żądanie
 
 function updateThingSpeak(value) {
   if (!canClick) {
-    console.log("Proszę poczekać 6 sekund przed kolejnym kliknięciem.");
+    console.log("Proszę poczekać 15 sekund przed kolejnym kliknięciem.");
     return; // Zakończ funkcję, jeśli kliknięcie jest zablokowane
   }
 
