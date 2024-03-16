@@ -1,5 +1,6 @@
 let canClick = true; // Zmienna kontrolująca, czy można wysłać żądanie
 let countdownTimer = document.getElementById('countdownTimer'); // Pobranie elementu licznika poza funkcję
+let intervalId = null; // Zmienna do przechowywania ID interwału
 
 function updateThingSpeak(value) {
   if (!canClick) {
@@ -8,7 +9,7 @@ function updateThingSpeak(value) {
   }
 
   canClick = false; // Blokuj kolejne kliknięcia
-  countdown(15); // Rozpocznij odliczanie
+  countdown(15); // Rozpocznij odliczanie do 15 sekund
 
   const writeApiKey = 'PD2PF82ZK1ZKM5G9';
   const url = `https://api.thingspeak.com/update?api_key=${writeApiKey}&field1=${value}`;
@@ -22,23 +23,24 @@ function updateThingSpeak(value) {
     .catch((error) => {
       console.error('Error:', error);
       countdownTimer.innerHTML = "Błąd połączenia, spróbuj ponownie później."; // Informacja o błędzie
-    })
-    .finally(() => {
-      // Zawsze zwalnia blokadę po próbie aktualizacji, nawet jeśli wystąpi błąd
-      canClick = true; 
-      countdownTimer.innerHTML = ""; // Usuń komunikat licznika/błędu
     });
 }
 
 function countdown(seconds) {
-  countdownTimer.innerHTML = `Poczekaj ${seconds} sekund(y) przed kolejnym kliknięciem.`;
+  // Czyścić istniejący licznik przed rozpoczęciem nowego
+  if (intervalId) {
+    clearInterval(intervalId);
+    intervalId = null;
+  }
 
-  let intervalId = setInterval(() => {
+  countdownTimer.innerHTML = `Poczekaj ${seconds} sekund(y) przed kolejnym kliknięciem.`;
+  intervalId = setInterval(() => {
     seconds--;
     countdownTimer.innerHTML = `Poczekaj ${seconds} sekund(y) przed kolejnym kliknięciem.`;
     if (seconds <= 0) {
       clearInterval(intervalId);
       countdownTimer.innerHTML = ""; // Usuń tekst licznika po zakończeniu odliczania
+      canClick = true; // Odblokuj kliknięcie po zakończeniu odliczania
     }
   }, 1000); // Odliczaj co 1 sekundę
 }
