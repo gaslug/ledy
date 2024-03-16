@@ -1,5 +1,5 @@
-
 let canClick = true; // Zmienna kontrolująca, czy można wysłać żądanie
+let countdownTimer = document.getElementById('countdownTimer'); // Pobranie elementu licznika poza funkcję
 
 function updateThingSpeak(value) {
   if (!canClick) {
@@ -21,11 +21,16 @@ function updateThingSpeak(value) {
     })
     .catch((error) => {
       console.error('Error:', error);
+      countdownTimer.innerHTML = "Błąd połączenia, spróbuj ponownie później."; // Informacja o błędzie
+    })
+    .finally(() => {
+      // Zawsze zwalnia blokadę po próbie aktualizacji, nawet jeśli wystąpi błąd
+      canClick = true; 
+      countdownTimer.innerHTML = ""; // Usuń komunikat licznika/błędu
     });
 }
 
 function countdown(seconds) {
-  const countdownTimer = document.getElementById('countdownTimer');
   countdownTimer.innerHTML = `Poczekaj ${seconds} sekund(y) przed kolejnym kliknięciem.`;
 
   let intervalId = setInterval(() => {
@@ -34,7 +39,6 @@ function countdown(seconds) {
     if (seconds <= 0) {
       clearInterval(intervalId);
       countdownTimer.innerHTML = ""; // Usuń tekst licznika po zakończeniu odliczania
-      canClick = true;
     }
   }, 1000); // Odliczaj co 1 sekundę
 }
