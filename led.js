@@ -6,7 +6,8 @@ function updateThingSpeak(value) {
   fetch(url, { method: 'GET' })
     .then(response => response.text())
     .then(data => {
-      console.log(`ThingSpeak update response: ${value}`);
+      console.log(`stan przycisku: ${value}`);
+      console.log(`ThingSpeak update response: ${data}`);
       // Tutaj możesz dodać logikę potwierdzenia, np. zmianę stanu przycisku
     })
     .catch((error) => {
