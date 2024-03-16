@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESP LED Control</title>
+<style>
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+
+  .button:hover {background-color: #3e8e41}
+
+  .button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  .red {background-color: #f44336;}
+  .green {background-color: #4CAF50;}
+  .blue {background-color: #008CBA;}
+  .toggle {background-color: #555555;}
+</style>
+</head>
+<body>
+
+<h2>ESP LED Control</h2>
+
+<!-- Przyciski do sterowania kolorami -->
+<button class="button red" onclick="updateThingSpeak(1)">Czerwony</button>
+<button class="button green" onclick="updateThingSpeak(2)">Zielony</button>
+<button class="button blue" onclick="updateThingSpeak(3)">Niebieski</button>
+<button class="button toggle" onclick="updateThingSpeak(4)">Włącz/Wyłącz</button>
+
+<script src="led.js"></script>
+</body>
+</html>
